@@ -1,0 +1,100 @@
+# Tools & Technologies for the Project
+---
+
+## Core Frameworks & Technologies
+
+### React
+A JavaScript library for building user interfaces through reusable components, hooks, and efficient state management.  
+[React Official Site](https://reactjs.org)  
+[React Crash Course – Traversy Media (YouTube)](https://www.youtube.com/watch?v=LDB4uaJ87e0)  
+[Modern React 2024 Crash Course – FreeCodeCamp](https://www.youtube.com/watch?v=HVFSgIVXcD4)
+
+---
+
+### .NET (ASP.NET Core)
+A modern, open-source framework for building scalable and high-performance backend applications.  
+It provides routing, middleware, data access, and dependency injection out of the box.  
+[Official .NET Website](https://dotnet.microsoft.com)  
+[ASP.NET Core Documentation](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
+
+---
+
+## Development Environments
+
+### WebStorm
+A powerful IDE for front-end development by JetBrains.  
+Optimized for JavaScript, TypeScript, and React with built-in debugging and version control integration.  
+[WebStorm Official Site](https://www.jetbrains.com/webstorm/)
+
+---
+
+### Rider
+JetBrains’ cross-platform IDE for .NET and ASP.NET Core projects.  
+Used for backend development, testing, and integration with databases.  
+[Rider Official Site](https://www.jetbrains.com/rider/)
+
+---
+
+## Supporting Tools & Libraries
+
+### ChatGPT (OpenAI)
+Used for brainstorming, debugging, writing documentation, and generating boilerplate code.  
+[ChatGPT](https://chat.openai.com)
+
+---
+
+### Git & GitHub
+Version control system for tracking project changes, managing branches, and collaboration.  
+[Git](https://git-scm.com) | [GitHub](https://github.com)
+
+---
+
+### Postman / Insomnia
+API testing tools for sending HTTP requests, inspecting responses, and debugging backend endpoints.  
+[Postman](https://www.postman.com) | [Insomnia](https://insomnia.rest)
+
+---
+
+### Swagger / OpenAPI
+Used to document and visualize REST APIs, helping the frontend and backend stay in sync.  
+[Swagger](https://swagger.io)
+
+---
+
+### Entity Framework Core
+An ORM for .NET to handle database interactions in an efficient, type-safe way.  
+[Entity Framework Core Docs](https://learn.microsoft.com/en-us/ef/core/)
+
+---
+
+### Axios / Fetch API
+Used in React for making HTTP requests to the backend API.  
+[Axios GitHub Repo](https://github.com/axios/axios)
+
+---
+
+### React Router
+A routing library for React that enables navigation between different views in a single-page app.  
+[React Router](https://reactrouter.com)
+
+---
+
+### UI / Styling Frameworks
+To speed up UI development using pre-built components and themes:  
+- [Material UI](https://mui.com)  
+- [Tailwind CSS](https://tailwindcss.com)  
+- [Chakra UI](https://chakra-ui.com)
+
+---
+
+## Learning Resources
+
+- [React Crash Course – Traversy Media](https://www.youtube.com/watch?v=LDB4uaJ87e0)  
+- [React JS 2024 Crash Course – FreeCodeCamp](https://www.youtube.com/watch?v=HVFSgIVXcD4)  
+- [Scrimba – Learn Modern React](https://scrimba.com/learn-react-c0e)  
+- [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/core/)  
+- [ChatGPT – OpenAI](https://chat.openai.com)
+
+---
+
+This setup ensures a smooth workflow between the React frontend and .NET backend, supported by JetBrains IDEs and modern development tools.
