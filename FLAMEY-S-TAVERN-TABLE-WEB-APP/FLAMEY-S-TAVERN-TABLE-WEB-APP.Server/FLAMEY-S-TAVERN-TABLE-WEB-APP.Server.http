@@ -1,0 +1,6 @@
+@FLAMEY_S_TAVERN_TABLE_WEB_APP.Server_HostAddress = http://localhost:5214
+
+GET {{FLAMEY_S_TAVERN_TABLE_WEB_APP.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
