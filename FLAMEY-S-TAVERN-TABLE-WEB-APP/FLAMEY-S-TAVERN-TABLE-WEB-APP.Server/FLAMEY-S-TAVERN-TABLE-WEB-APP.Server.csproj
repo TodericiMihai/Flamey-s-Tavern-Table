@@ -8,6 +8,7 @@
     <SpaRoot>..\flamey-s-tavern-table-web-app.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:51959</SpaProxyServerUrl>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

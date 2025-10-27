@@ -9,10 +9,10 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlameysavernTableController(SignInManager<User> sm, UserManager<User> um) : ControllerBase
+    public class FlameyTavernTableController(SignInManager<User> sm, UserManager<User> um) : ControllerBase
     {
-        private readonly SignInManager<User> signInManager;
-        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager = sm;
+        private readonly UserManager<User> userManager = um;
 
 
         [HttpPost("register")]
@@ -40,8 +40,9 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                 message = "Register Successfully.";
 
             }
-            catch (Exception ex) {
-                return BadRequest("Something went wrong, please try again.");
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Something went wrong, please try again.", error = ex.Message });
             }
 
             return Ok(new { message = message, result = result });
