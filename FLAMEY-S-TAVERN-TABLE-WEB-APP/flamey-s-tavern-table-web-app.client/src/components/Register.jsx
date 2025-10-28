@@ -43,7 +43,7 @@ function Register() {
     
     async function registerHandler(e) {
         e.preventDefault();
-        const _form = e.target, submitter = document.querySelector("input.login")
+        const _form = e.target, submitter = document.querySelector("input[type='submit']")
 
         const formData = new FormData(_form,submitter), dataToSend = {}
         
@@ -56,7 +56,7 @@ function Register() {
         const newUserName = dataToSend.name.trim().split("")
         dataToSend.UserName= newUserName.join("")
 
-        const response = await fetch('api/FlameysTavernTable/register', {
+        const response = await fetch('api/FlameyTT/register', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(dataToSend),

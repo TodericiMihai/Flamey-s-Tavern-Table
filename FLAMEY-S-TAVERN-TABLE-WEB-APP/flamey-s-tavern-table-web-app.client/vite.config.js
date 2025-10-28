@@ -51,7 +51,7 @@ export default defineConfig({
                 target,
                 secure: false
             },
-            '^/api/FlameyTavernTable':{
+            '^/api/FlameyTT':{
                 target,
                 secure: false
             }

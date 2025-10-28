@@ -9,7 +9,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlameyTavernTableController(SignInManager<User> sm, UserManager<User> um) : ControllerBase
+    public class FlameyTTController(SignInManager<User> sm, UserManager<User> um) : ControllerBase
     {
         private readonly SignInManager<User> signInManager = sm;
         private readonly UserManager<User> userManager = um;
@@ -65,7 +65,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                     user_.EmailConfirmed = true;
                 }
 
-                var result = await signInManager.PasswordSignInAsync(user_, login.Password, login.Remember, false);
+                var result = await signInManager.PasswordSignInAsync(user_.UserName, login.Password, login.Remember, false);
 
 
                 if (!result.Succeeded)

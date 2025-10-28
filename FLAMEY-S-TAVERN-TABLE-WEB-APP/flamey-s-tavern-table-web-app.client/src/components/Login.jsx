@@ -23,15 +23,15 @@ function Login() {
             <form action ='#' className='login' onSubmit={loginHandler}>
 
                 <label htmlFor ="email">Email: </label>
-                <input type="email" id="email" name="email" required />
+                <input type="email" id="email" name="Email" required />
                 <br />
                 
                 <label htmlFor ="password">Password: </label>
-                <input type="password" id="password" name="password" required />
+                <input type="password" id="password" name="Password" required />
                 <br />
 
                 <br />
-                <input type="checkbox" name="remember-me" id="remember-me" /> 
+                <input type="checkbox" name="Remember" id="remember-me" /> 
                 <label htmlFor="remember-me">Remember Me</label>
                 
                 <br />
@@ -44,7 +44,7 @@ function Login() {
     
     async function loginHandler(e) {
         e.preventDefault();
-        const _form = e.target, submitter = document.querySelector("input.login")
+        const _form = e.target, submitter = document.querySelector("input[type='submit']")
 
         const formData = new FormData(_form,submitter), dataToSend = {}
         
@@ -56,7 +56,7 @@ function Login() {
             dataToSend.Remember = true
         }
 
-        const response = await fetch('api/FlameysTavernTable/login', {
+        const response = await fetch('api/FlameyTT/login', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(dataToSend),
@@ -69,7 +69,7 @@ function Login() {
         const data = await response.json()
 
         if(response.ok){
-            localStorage.setItem('user', dataToSend.email)
+            localStorage.setItem('user', dataToSend.Email)
             document.location = "/"
         }
 

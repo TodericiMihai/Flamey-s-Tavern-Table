@@ -8,7 +8,7 @@ function Admin() {
 
     useEffect(() => {
 
-        fetch("api/FlameysTavernTable/admin", {
+        fetch("api/FlameyTT/admin", {
             method: 'GET',
             credentials: 'include'
         }).then(response => response.json()).then(data => {

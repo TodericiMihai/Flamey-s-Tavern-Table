@@ -6,7 +6,7 @@ function ProtectedRoutes() {
     const [waiting, setWaiting] = useState(true);
 
     useEffect(() => {
-        fetch("api/FlameysTavernTable/iahjwevdf", {
+        fetch("api/FlameyTT/iahjwevdf", {
             method: 'GET',
             credentials: "include"
         }).then(response => response.json()).then(data => {
