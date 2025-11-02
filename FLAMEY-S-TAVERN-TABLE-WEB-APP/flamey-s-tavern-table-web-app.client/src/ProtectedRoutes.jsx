@@ -9,17 +9,21 @@ function ProtectedRoutes() {
         fetch("api/FlameyTT/iahjwevdf", {
             method: 'GET',
             credentials: "include"
-        }).then(response => response.json()).then(data => {
-            setIsLogged(true)
-            setWaiting(false)
+        }).then(response => {
+            if (response.ok) {
+                setWaiting(false);
+                setIsLogged(true);
+            }
+            return response.json()
+        }).then(data => {
             localStorage.setItem('user', data.user.email);
+            console.log(data.user)
         }).catch(error => {
             console.log('Error checking login status:', error);
             setWaiting(false);
             localStorage.removeItem('user');
-            
         });
-    });
+    }, []);
 
     return waiting ? <div className = "waiting-page">
         <div>Loading...</div>

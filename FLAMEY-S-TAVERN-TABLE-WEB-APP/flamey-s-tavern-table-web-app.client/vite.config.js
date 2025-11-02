@@ -48,11 +48,11 @@ export default defineConfig({
     server: {
         proxy: {
             '^/weatherforecast': {
-                target,
+                target: "https://localhost:7011",
                 secure: false
             },
-            '^/api/FlameyTT':{
-                target,
+            '^/api':{
+                target : "https://localhost:7011",
                 secure: false
             }
         },

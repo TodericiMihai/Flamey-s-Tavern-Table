@@ -19,7 +19,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 
         public async Task<ActionResult> registerUser(User user)
         {
-            string message = "";
+     
             IdentityResult result = new();
 
             try
@@ -30,14 +30,13 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                     Email = user.Email,
                     Name = user.Name,
                 };
-                result = await userManager.CreateAsync(user_);
+                result = await userManager.CreateAsync(user_,user.PasswordHash);
 
                 if (!result.Succeeded)
                 {
                     return BadRequest(result);
                 }
 
-                message = "Register Successfully.";
 
             }
             catch (Exception ex)
@@ -45,7 +44,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                 return BadRequest(new { message = "Something went wrong, please try again.", error = ex.Message });
             }
 
-            return Ok(new { message = message, result = result });
+            return Ok(new { message = "Register Successfully.", result = result });
 
         }
 
@@ -53,39 +52,41 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 
         public async Task<ActionResult> logInUser(Login login)
         {
-            string message = "";
-
 
             try
             {
                 User user_ = await userManager.FindByEmailAsync(login.Email);
 
-                if (user_ != null && !user_.EmailConfirmed)
-                {
+                if (user_ != null) {
+                    login.Username = user_.UserName;
+                }
+
+                if (!user_.EmailConfirmed) {
+
                     user_.EmailConfirmed = true;
                 }
 
-                var result = await signInManager.PasswordSignInAsync(user_.UserName, login.Password, login.Remember, false);
+                var result = await signInManager.PasswordSignInAsync(user_, login.Password, login.Remember, false);
 
 
                 if (!result.Succeeded)
                 {
-                    return Unauthorized("Check your login credentials and try again.");
+                    return Unauthorized(new { message = "Check your login credentials and try again." });
                 }
 
                 user_.LastLogin = DateTime.Now;
 
                 var updateResult = await userManager.UpdateAsync(user_);
 
-                message = "Login Successfully.";
+                
 
             }
             catch (Exception ex)
             {
-                return BadRequest("Something went wrong, please try again." + ex.Message);
+                return BadRequest(new { mesasge = "Something went wrong, please try again." + ex.Message });
             }
 
-            return Ok(new { message = message });
+            return Ok(new { message = "Login Successfully." });
 
         }
 
@@ -93,7 +94,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 
         public async Task<ActionResult> logOutUser()
         {
-            string message = "You are free to go";
+
 
             try
             {
@@ -102,10 +103,10 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Somethign went wrong, please try again. " + ex.Message);
+                return BadRequest(new { message = "Somethign went wrong, please try again. " + ex.Message });
             }
 
-            return Ok(new { message = message });
+            return Ok(new { message = "You are free to go" });
 
         }
 
@@ -132,12 +133,13 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
             return Ok(new { userInfo = userInfo });
         }
 
-        [HttpGet("iahjwevdf"), Authorize]
+        [HttpGet("iahjwevdf")]
 
-        public async Task<ActionResult> checkUser(string email)
+        public async Task<ActionResult> CheckUser()
         {
-            string message = "LogIn";
+
             User currentuser = new();
+
             try
             {
                 var user_ = HttpContext.User;
@@ -149,16 +151,16 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                 }
                 else
                 {
-                    return Forbid("Access Denied!");
+                    return Forbid();
                 }
 
             }
             catch (Exception ex) 
             {
-                return BadRequest("Something went wrong, please try again" + ex.Message);
+                return BadRequest(new { message = "Something went wrong, please try again" + ex.Message });
             }
 
-            return Ok(new { message = message, user = currentuser });
+            return Ok(new { message = "LogIn", user = currentuser });
 
         }
     }

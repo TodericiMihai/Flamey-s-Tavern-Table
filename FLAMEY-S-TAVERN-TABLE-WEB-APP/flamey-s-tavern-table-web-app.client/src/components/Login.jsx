@@ -11,7 +11,7 @@ function Login() {
         if (user) {
             document.location = "/";
         }
-    });
+    }, []);
     
     return (
      <section className='login-page-wrapper page'>
@@ -39,20 +39,24 @@ function Login() {
                 <input type="submit" value="Login" className="login btn"/>
             </form>
         </div>
+        <div className='my-5'>
+            <span>Don't have an account? </span>
+            <a href="/register">Register here</a>
+        </div>
      </section>
     );
     
     async function loginHandler(e) {
         e.preventDefault();
-        const _form = e.target, submitter = document.querySelector("input[type='submit']")
+        const form_ = e.target, submitter = document.querySelector("input[type='submit']")
 
-        const formData = new FormData(_form,submitter), dataToSend = {}
+        const formData = new FormData(form_,submitter), dataToSend = {}
         
         for(const [key, value] of formData){
             dataToSend[key] = value
         }
-        
-        if(dataToSend.Remember==='on'){
+
+        if(dataToSend.Remember === 'on'){
             dataToSend.Remember = true
         }
 
@@ -61,7 +65,7 @@ function Login() {
             credentials: 'include',
             body: JSON.stringify(dataToSend),
             headers: {
-                'Content-Type': 'Application/json',
+                'content-type': 'Application/json',
                 'Accept': 'Application/json'
             }
         })
@@ -81,7 +85,7 @@ function Login() {
             messageElem.innerHTML = "An unexpected error occurred. Please try again."
         }
 
-        console.log('Login error:', data);
+        console.log('Login error: ', data);
     }    
 }
 

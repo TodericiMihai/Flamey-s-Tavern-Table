@@ -11,7 +11,7 @@ function Register() {
         if (user) {
             document.location = "/";
         }
-    });
+    }, []);
     
     return (
      <section className='register-page-wrapper page'>
@@ -23,27 +23,31 @@ function Register() {
             <form action ='#' className='register' onSubmit={registerHandler}>
 
                 <label htmlFor ="name">Name: </label>
-                <input type="text" id="name" name="name" required />
+                <input type="text" id="name" name="Name" required />
                 <br />
 
                 <label htmlFor ="email">Email: </label>
-                <input type="email" id="email" name="email" required />
+                <input type="email" id="email" name="Email" required />
                 <br />
                 
                 <label htmlFor ="password">Password: </label>
-                <input type="password" id="password" name="password" required />
+                <input type="password" id="password" name="PasswordHash" required />
                 <br />
                 
                 <br />
                 <input type="submit" value="Register" className="register btn"/>
             </form>
         </div>
+        <div className='my-5'>
+            <span>Do you have an account? </span>
+            <a href="/login">Login here</a>
+        </div>
      </section>
     );
     
     async function registerHandler(e) {
         e.preventDefault();
-        const _form = e.target, submitter = document.querySelector("input[type='submit']")
+        const _form = e.target, submitter = document.querySelector("input.login")
 
         const formData = new FormData(_form,submitter), dataToSend = {}
         
@@ -53,7 +57,7 @@ function Register() {
         
         //create username
 
-        const newUserName = dataToSend.name.trim().split("")
+        const newUserName = dataToSend.Name.trim().split(" ")
         dataToSend.UserName= newUserName.join("")
 
         const response = await fetch('api/FlameyTT/register', {
@@ -61,7 +65,7 @@ function Register() {
             credentials: 'include',
             body: JSON.stringify(dataToSend),
             headers: {
-                'Content-Type': 'Application/json',
+                'content-type': 'Application/json',
                 'Accept': 'Application/json'
             }
         })

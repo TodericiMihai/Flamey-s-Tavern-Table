@@ -31,6 +31,26 @@ const router = createBrowserRouter(
 ));
 function App() {
     const isLogged = localStorage.getItem('user') 
+
+    const logout = async () => {
+        const response = await fetch("api/FlameyTT/logout", {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.removeItem('user');
+
+            alert(data.message);
+
+            document.location = "/login";
+        } else {
+            console.log('Logout failed:', response);
+        }
+    };
+
     return (
      <section >
         <div className="top-nav">
@@ -39,7 +59,7 @@ function App() {
                 <span className="item-holder">
                     <a href ="/">Home</a>
                     <a href ="/admin">Admin</a>
-                    <span>Log Out</span>
+                    <span onClick={logout}>Log Out</span>
                 </span>:
                 <span className="item-holder">
                     <a href ="/login">Login    </a>

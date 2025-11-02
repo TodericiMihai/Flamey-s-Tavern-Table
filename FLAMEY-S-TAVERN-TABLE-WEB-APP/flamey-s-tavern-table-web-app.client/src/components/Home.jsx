@@ -8,7 +8,7 @@ function Home() {
 
     useEffect(() => {
         const user = localStorage.getItem('user');
-        fetch("api/FlameyTT/home" + user, {
+        fetch("api/FlameyTT/home/" + user, {
             method: 'GET',
             credentials: 'include'
         }).then(response => response.json()).then(data => {
