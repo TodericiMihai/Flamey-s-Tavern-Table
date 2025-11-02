@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FLAMEY-S-TAVERN-TABLE-WEB-APP.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecc6d445c8c09a65705d259845ab344042f18dc1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2cea2590cd34dda4aefb65af9d459a53491544c")]
 [assembly: System.Reflection.AssemblyProductAttribute("FLAMEY-S-TAVERN-TABLE-WEB-APP.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FLAMEY-S-TAVERN-TABLE-WEB-APP.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
