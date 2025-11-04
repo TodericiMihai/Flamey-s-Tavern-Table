@@ -26,16 +26,23 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
         [Required]
         public bool IsActive { get; set; } = true;
 
-        public  List<Player> Players { get; set; } = [];
+        // Many players per campaign via join table
+        public List<Player> Players { get; set; } = new List<Player>();
 
         [Required]
-        public string DMUserId { get; set; }
-        public  DM DMUser { get; set; }
+        public string DMId { get; set; }  //FK to User 
+        // This will be used to search for campains where the user is the DM
+
+        [ForeignKey(nameof(DMId))]
+        public User DM { get; set; }
 
         [Required]
         [MaxLength(8)]
         public string JoinCode { get; set; } = string.Empty;
 
+        public List<NPC> NPCs { get; set; } = new List<NPC>();
+
+        public List<Location> Locations {  get; set; } =new List<Location> ();
 
     }
 }

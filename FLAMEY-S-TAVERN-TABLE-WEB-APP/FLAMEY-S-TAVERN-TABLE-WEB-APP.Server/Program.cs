@@ -51,6 +51,11 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server
 
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //using var scope = app.Services.CreateScope();
+            //var context = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+
+            //SeedDndData.Seed(context);
+
             var app = builder.Build();
 
             app.UseDefaultFiles();
