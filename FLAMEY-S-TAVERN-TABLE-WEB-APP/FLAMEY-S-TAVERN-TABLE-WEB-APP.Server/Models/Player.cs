@@ -11,5 +11,6 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
 
         [ForeignKey(nameof(OwnerId))]
         public User Owner { get; set; }
+        
     }
 }

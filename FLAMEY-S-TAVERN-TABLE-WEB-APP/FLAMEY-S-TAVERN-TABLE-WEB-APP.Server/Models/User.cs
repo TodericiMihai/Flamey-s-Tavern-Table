@@ -24,7 +24,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
 
         public bool isAdmin { get; set; } = false;
 
-        public HashSet<Campaign> PlayerCampaigns { get; set; } = new HashSet<Campaign>();
+        public HashSet<Campaign> Campaigns { get; set; } = new HashSet<Campaign>();
 
 
     }

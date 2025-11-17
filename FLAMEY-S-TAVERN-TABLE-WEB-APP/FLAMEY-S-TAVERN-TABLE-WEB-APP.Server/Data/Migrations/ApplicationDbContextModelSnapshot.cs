@@ -42,11 +42,8 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DMId")
                         .IsRequired()
@@ -79,7 +76,60 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
 
                     b.HasIndex("DMId");
 
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
+                });
+
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BackgroundId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CampaignId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RaceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BackgroundId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("Characters");
+
+                    b.HasDiscriminator().HasValue("Character");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Class", b =>
@@ -105,27 +155,23 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CharacterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NPCId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PlayerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NPCId");
+                    b.HasIndex("CharacterId");
 
-                    b.HasIndex("PlayerId");
-
-                    b.ToTable("Item");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Location", b =>
@@ -133,8 +179,9 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("CampaignId")
-                        .HasColumnType("int");
+                    b.Property<string>("CampaignId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -148,103 +195,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
 
                     b.HasIndex("CampaignId");
 
-                    b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BackgroundId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CampaignId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClassId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RaceId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BackgroundId");
-
-                    b.HasIndex("CampaignId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable("NPC");
-                });
-
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BackgroundId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CampaignId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClassId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RaceId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BackgroundId");
-
-                    b.HasIndex("CampaignId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("OwnerId");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable("Player");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Race", b =>
@@ -270,27 +221,23 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CharacterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NPCId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PlayerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NPCId");
+                    b.HasIndex("CharacterId");
 
-                    b.HasIndex("PlayerId");
-
-                    b.ToTable("Spell");
+                    b.ToTable("Spells");
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.User", b =>
@@ -508,10 +455,34 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", b =>
+                {
+                    b.HasBaseType("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character");
+
+                    b.HasIndex("CampaignId");
+
+                    b.HasDiscriminator().HasValue("NPC");
+                });
+
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", b =>
+                {
+                    b.HasBaseType("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("CampaignId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasDiscriminator().HasValue("Player");
+                });
+
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", b =>
                 {
                     b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.User", "DM")
-                        .WithMany("PlayerCampaigns")
+                        .WithMany("Campaigns")
                         .HasForeignKey("DMId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -519,103 +490,64 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.Navigation("DM");
                 });
 
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character", b =>
+                {
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Background", "Background")
+                        .WithMany()
+                        .HasForeignKey("BackgroundId");
+
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId");
+
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId");
+
+                    b.Navigation("Background");
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Race");
+                });
+
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Item", b =>
                 {
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", null)
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character", "Character")
                         .WithMany("Items")
-                        .HasForeignKey("NPCId");
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", null)
-                        .WithMany("Items")
-                        .HasForeignKey("PlayerId");
+                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Location", b =>
                 {
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", null)
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", "Campaign")
                         .WithMany("Locations")
-                        .HasForeignKey("CampaignId");
-                });
-
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", b =>
-                {
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Background", "Background")
-                        .WithMany()
-                        .HasForeignKey("BackgroundId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", null)
-                        .WithMany("NPCs")
-                        .HasForeignKey("CampaignId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId");
-
-                    b.Navigation("Background");
-
-                    b.Navigation("Class");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", b =>
-                {
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Background", "Background")
-                        .WithMany()
-                        .HasForeignKey("BackgroundId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", null)
-                        .WithMany("Players")
-                        .HasForeignKey("CampaignId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId");
-
-                    b.Navigation("Background");
-
-                    b.Navigation("Class");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Owner");
-
-                    b.Navigation("Race");
+                    b.Navigation("Campaign");
                 });
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Spell", b =>
                 {
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", null)
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character", "Character")
                         .WithMany("Spells")
-                        .HasForeignKey("NPCId");
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", null)
-                        .WithMany("Spells")
-                        .HasForeignKey("PlayerId");
+                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -669,6 +601,36 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", b =>
+                {
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", "Campaign")
+                        .WithMany("NPCs")
+                        .HasForeignKey("CampaignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Campaign");
+                });
+
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", b =>
+                {
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", "Campaign")
+                        .WithMany("Players")
+                        .HasForeignKey("CampaignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Campaign");
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Campaign", b =>
                 {
                     b.Navigation("Locations");
@@ -678,14 +640,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                     b.Navigation("Players");
                 });
 
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.NPC", b =>
-                {
-                    b.Navigation("Items");
-
-                    b.Navigation("Spells");
-                });
-
-            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Player", b =>
+            modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.Character", b =>
                 {
                     b.Navigation("Items");
 
@@ -694,7 +649,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
 
             modelBuilder.Entity("FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models.User", b =>
                 {
-                    b.Navigation("PlayerCampaigns");
+                    b.Navigation("Campaigns");
                 });
 #pragma warning restore 612, 618
         }

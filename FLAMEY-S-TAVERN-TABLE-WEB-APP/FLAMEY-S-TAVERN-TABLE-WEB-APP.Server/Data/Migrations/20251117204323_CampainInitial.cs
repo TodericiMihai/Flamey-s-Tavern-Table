@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDnDModels : Migration
+    public partial class CampainInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,11 +25,10 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Campaign",
+                name: "Campaigns",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -40,9 +39,9 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Campaign", x => x.Id);
+                    table.PrimaryKey("PK_Campaigns", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Campaign_AspNetUsers_DMId",
+                        name: "FK_Campaigns_AspNetUsers_DMId",
                         column: x => x.DMId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -76,269 +75,180 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CampaignId = table.Column<int>(type: "int", nullable: true)
+                    CampaignId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.PrimaryKey("PK_Locations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Location_Campaign_CampaignId",
+                        name: "FK_Locations_Campaigns_CampaignId",
                         column: x => x.CampaignId,
-                        principalTable: "Campaign",
-                        principalColumn: "Id");
+                        principalTable: "Campaigns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "NPC",
+                name: "Characters",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CampaignId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CampaignId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     BackgroundId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RaceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ClassId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LocationId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    LocationId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NPC", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NPC_Background_BackgroundId",
-                        column: x => x.BackgroundId,
-                        principalTable: "Background",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_NPC_Campaign_CampaignId",
-                        column: x => x.CampaignId,
-                        principalTable: "Campaign",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_NPC_Class_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Class",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_NPC_Location_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Location",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_NPC_Race_RaceId",
-                        column: x => x.RaceId,
-                        principalTable: "Race",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Player",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CampaignId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    BackgroundId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    RaceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ClassId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LocationId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Player", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Player_AspNetUsers_OwnerId",
+                        name: "FK_Characters_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Player_Background_BackgroundId",
+                        name: "FK_Characters_Background_BackgroundId",
                         column: x => x.BackgroundId,
                         principalTable: "Background",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Player_Campaign_CampaignId",
+                        name: "FK_Characters_Campaigns_CampaignId",
                         column: x => x.CampaignId,
-                        principalTable: "Campaign",
-                        principalColumn: "Id");
+                        principalTable: "Campaigns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Player_Class_ClassId",
+                        name: "FK_Characters_Class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "Class",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Player_Location_LocationId",
+                        name: "FK_Characters_Locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Player_Race_RaceId",
+                        name: "FK_Characters_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
+                name: "Items",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NPCId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CharacterId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_NPC_NPCId",
-                        column: x => x.NPCId,
-                        principalTable: "NPC",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Item_Player_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Player",
-                        principalColumn: "Id");
+                        name: "FK_Items_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Spell",
+                name: "Spells",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NPCId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CharacterId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Spell", x => x.Id);
+                    table.PrimaryKey("PK_Spells", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Spell_NPC_NPCId",
-                        column: x => x.NPCId,
-                        principalTable: "NPC",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Spell_Player_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Player",
-                        principalColumn: "Id");
+                        name: "FK_Spells_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Campaign_DMId",
-                table: "Campaign",
+                name: "IX_Campaigns_DMId",
+                table: "Campaigns",
                 column: "DMId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_NPCId",
-                table: "Item",
-                column: "NPCId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_PlayerId",
-                table: "Item",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Location_CampaignId",
-                table: "Location",
-                column: "CampaignId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NPC_BackgroundId",
-                table: "NPC",
+                name: "IX_Characters_BackgroundId",
+                table: "Characters",
                 column: "BackgroundId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NPC_CampaignId",
-                table: "NPC",
+                name: "IX_Characters_CampaignId",
+                table: "Characters",
                 column: "CampaignId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NPC_ClassId",
-                table: "NPC",
+                name: "IX_Characters_ClassId",
+                table: "Characters",
                 column: "ClassId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NPC_LocationId",
-                table: "NPC",
+                name: "IX_Characters_LocationId",
+                table: "Characters",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NPC_RaceId",
-                table: "NPC",
-                column: "RaceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_BackgroundId",
-                table: "Player",
-                column: "BackgroundId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_CampaignId",
-                table: "Player",
-                column: "CampaignId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_ClassId",
-                table: "Player",
-                column: "ClassId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_LocationId",
-                table: "Player",
-                column: "LocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_OwnerId",
-                table: "Player",
+                name: "IX_Characters_OwnerId",
+                table: "Characters",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Player_RaceId",
-                table: "Player",
+                name: "IX_Characters_RaceId",
+                table: "Characters",
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Spell_NPCId",
-                table: "Spell",
-                column: "NPCId");
+                name: "IX_Items_CharacterId",
+                table: "Items",
+                column: "CharacterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Spell_PlayerId",
-                table: "Spell",
-                column: "PlayerId");
+                name: "IX_Locations_CampaignId",
+                table: "Locations",
+                column: "CampaignId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Spells_CharacterId",
+                table: "Spells",
+                column: "CharacterId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Spell");
+                name: "Spells");
 
             migrationBuilder.DropTable(
-                name: "NPC");
-
-            migrationBuilder.DropTable(
-                name: "Player");
+                name: "Characters");
 
             migrationBuilder.DropTable(
                 name: "Background");
@@ -347,13 +257,13 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data.Migrations
                 name: "Class");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "Race");
 
             migrationBuilder.DropTable(
-                name: "Campaign");
+                name: "Campaigns");
         }
     }
 }

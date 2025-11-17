@@ -1,22 +1,36 @@
-﻿using FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models;
+﻿using FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data;
+using FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.DTO;
+using FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models;
+using FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlameyTTController(SignInManager<User> sm, UserManager<User> um) : ControllerBase
+    public class FlameyTTController: ControllerBase
     {
-        private readonly SignInManager<User> signInManager = sm;
-        private readonly UserManager<User> userManager = um;
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly ApplicationDbContext context;
+
+        public FlameyTTController(SignInManager<User> signInManager,
+                          UserManager<User> userManager,
+                          ApplicationDbContext context)
+        {
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.context = context;
+        }
 
 
         [HttpPost("register")]
-
+        //mod here to use a dto
         public async Task<ActionResult> registerUser(User user)
         {
      
@@ -120,18 +134,91 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
         }
 
         [HttpGet("home/{email}"), Authorize]
-
         public async Task<ActionResult> homePage(string email)
         {
-            User userInfo = await userManager.FindByEmailAsync(email);
+            // Safe Identity lookup
+            var user = await userManager.FindByEmailAsync(email);
 
-            if (userInfo == null)
+            if (user == null)
+                return BadRequest(new { message = "User not found" });
+
+            // Load navigation properties (Campaigns)
+            var userInfo = await userManager.Users
+                .Where(u => u.Id == user.Id)
+                .Include(u => u.Campaigns)
+                .FirstOrDefaultAsync();
+
+            return Ok(new
             {
-                return BadRequest(new { message = "Something went wrong, please try again" });
-            }
-
-            return Ok(new { userInfo = userInfo });
+                user = new
+                {
+                    userInfo.Id,
+                    userInfo.Name,
+                    userInfo.Email,
+                    userInfo.UserName,
+                    campaigns = userInfo.Campaigns.Select(c => new
+                    {
+                        c.Id,
+                        c.Name,
+                        c.Description
+                    })
+                }
+            });
         }
+
+        [HttpPost("campaign/create"), Authorize]
+        public async Task<IActionResult> CreateCampaign(CreateCampaignDto dto)
+        {
+            try
+            {
+                // Get logged-in user
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
+                    return Unauthorized(new { message = "You must be logged in" });
+
+                // Generate unique join code
+                string joinCode;
+                do
+                {
+                    joinCode = JoinCodeGenerator.Generate(8);
+                } while (await context.Campaigns.AnyAsync(c => c.JoinCode == joinCode));
+
+                // Create campaign
+                var campaign = new Campaign
+                {
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    DMId = user.Id,
+                    JoinCode = joinCode,
+                    StartDate = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    IsActive = true
+                };
+
+                // Save to database
+                context.Campaigns.Add(campaign);
+                await context.SaveChangesAsync();
+
+                // Return new campaign
+                return Ok(new
+                {
+                    message = "Campaign created",
+                    campaign = new
+                    {
+                        campaign.Id,
+                        campaign.Name,
+                        campaign.Description,
+                        campaign.JoinCode
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error creating campaign", error = ex.Message });
+            }
+        }
+
+
 
         [HttpGet("iahjwevdf")]
 

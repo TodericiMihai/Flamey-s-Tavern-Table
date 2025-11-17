@@ -8,7 +8,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
     {
 
         [Key]
-        public int Id {  get; set; }
+        public string Id {  get; set; }
 
         [Required]
         [MaxLength(100)]
