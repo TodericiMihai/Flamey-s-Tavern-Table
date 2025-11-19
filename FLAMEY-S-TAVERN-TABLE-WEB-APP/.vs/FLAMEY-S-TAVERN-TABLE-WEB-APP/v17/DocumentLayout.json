@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\controllers\\dashboard\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|c:\\users\\todmi\\desktop\\flamey\u0027s tavern table\\flamey-s-tavern-table-web-app\\flamey-s-tavern-table-web-app.server\\controllers\\dashboard\\deletecampaigndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\controllers\\dashboard\\deletecampaigndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|c:\\users\\todmi\\desktop\\flamey\u0027s tavern table\\flamey-s-tavern-table-web-app\\flamey-s-tavern-table-web-app.server\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|c:\\users\\todmi\\desktop\\flamey\u0027s tavern table\\flamey-s-tavern-table-web-app\\flamey-s-tavern-table-web-app.server\\controllers\\dashboard\\createcampaigndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\controllers\\dashboard\\createcampaigndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|c:\\users\\todmi\\desktop\\flamey\u0027s tavern table\\flamey-s-tavern-table-web-app\\flamey-s-tavern-table-web-app.server\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|c:\\users\\todmi\\desktop\\flamey\u0027s tavern table\\flamey-s-tavern-table-web-app\\flamey-s-tavern-table-web-app.server\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F5A579B-E020-4C62-BECA-C5044BCF7F5B}|FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj|solutionrelative:flamey-s-tavern-table-web-app.server\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,45 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DeleteCampaignDto.cs",
-              "DocumentMoniker": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DeleteCampaignDto.cs",
-              "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DeleteCampaignDto.cs",
-              "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DeleteCampaignDto.cs",
-              "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DeleteCampaignDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T16:57:13.813Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CreateCampaignDto.cs",
-              "DocumentMoniker": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\CreateCampaignDto.cs",
-              "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\CreateCampaignDto.cs",
-              "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\CreateCampaignDto.cs",
-              "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\CreateCampaignDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Models\\Player.cs",
+              "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Models\\Player.cs",
+              "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Models\\Player.cs",
+              "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Models\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T15:55:43.435Z",
+              "WhenOpened": "2025-11-19T19:19:06.598Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Auth\\AuthController.cs",
-              "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Auth\\AuthController.cs",
-              "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Auth\\AuthController.cs",
-              "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Auth\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA7AAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAwwCEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T15:19:48.533Z",
+              "WhenOpened": "2025-11-19T18:05:02.757Z",
               "EditorCaption": ""
             },
             {
@@ -75,7 +58,7 @@
               "RelativeDocumentMoniker": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DashboardController.cs",
               "ToolTip": "C:\\Users\\todmi\\Desktop\\FLAMEY\u0027S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DashboardController.cs",
               "RelativeToolTip": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\Controllers\\Dashboard\\DashboardController.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAkwIUAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwCcAAABzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-17T20:49:53.624Z",
               "EditorCaption": ""

@@ -37,7 +37,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
             return Ok(new { trustedParteners = parteners });
         }
 
-        [HttpGet("home/{email}"), Authorize]
+        [HttpGet("home/{email}"), Authorize]// split this into data about user and data about campaigns and players
         public async Task<ActionResult> homePage(string email)
         {
             // Safe Identity lookup
@@ -49,7 +49,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
             // Load navigation properties (Campaigns)
             var userInfo = await userManager.Users
                 .Where(u => u.Id == user.Id)
-                .Include(u => u.Campaigns)
+                .Include(u => u.UserIsDm)                
                 .FirstOrDefaultAsync();
 
             return Ok(new
@@ -60,13 +60,14 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
                     userInfo.Email,
                     userInfo.UserName,
                     userInfo.CreatedDate,
-                    campaigns = userInfo.Campaigns.Select(c => new
+                    campaigns = userInfo.UserIsDm.Select(c => new
                     {
                         c.Id,
                         c.Name,
                         c.Description,
                         c.JoinCode
                     })
+                   
                 }
             });
         }
@@ -160,6 +161,41 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
                 return BadRequest(new { message = "Error deleting campaign", error = ex.Message });
             }
         }
+        [HttpPost("campaign/join"), Authorize]
+        public async Task<ActionResult> JoinCampaign(JoinCampaignDto dto)
+        {
+            try
+            {
+                var JoinCode = dto.JoinCode;
 
+                // Get logged-in user
+                var user = await userManager.GetUserAsync(User);
+
+                if (user == null)
+                    return Unauthorized(new { message = "You must be logged in" });
+
+                // Find the campaign by ID and ensure it belongs to this user (DM)
+                var campaign = await context.Campaigns
+                    .FirstOrDefaultAsync(c => c.JoinCode == JoinCode);
+
+                if (campaign == null)
+                {
+                    return NotFound(new { message = "Campaign not found or you do not have permission to delete it." });
+                }
+
+                if (campaign.DMId == user.Id)
+                    return Unauthorized(new { message = "You cannot join your own campaign" });
+
+
+
+
+                // Return new campaign
+                return Ok(new { message = "You joined " });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error deleting campaign", error = ex.Message });
+            }
+        }
     }
 }

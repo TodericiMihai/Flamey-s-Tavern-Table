@@ -22,9 +22,11 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
 
         public DateTime LastLogin { get; set; } = DateTime.Now;
 
-        public bool isAdmin { get; set; } = false;
+        public bool IsAdmin { get; set; } = false;
 
-        public HashSet<Campaign> Campaigns { get; set; } = new HashSet<Campaign>();
+        public List<Campaign> UserIsDm { get; set; } = new List<Campaign>();
+
+        public List<Player> UserIsPlayer { get; set; } = new List<Player>();
 
 
     }

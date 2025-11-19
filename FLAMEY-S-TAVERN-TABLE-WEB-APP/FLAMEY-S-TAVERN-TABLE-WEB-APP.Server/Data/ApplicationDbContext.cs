@@ -22,10 +22,18 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data
 
             // ---------- User → Campaign (DM) ----------
             builder.Entity<User>()
-                .HasMany(u => u.Campaigns)
+                .HasMany(u => u.UserIsDm)
                 .WithOne(c => c.DM)
                 .HasForeignKey(c => c.DMId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // ---------- User → Player ----------
+            builder.Entity<User>()
+                .HasMany(u => u.UserIsPlayer)
+                .WithOne(p => p.Owner)
+                .HasForeignKey(p => p.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
             // ---------- Campaign → Players ----------
             builder.Entity<Character>()
