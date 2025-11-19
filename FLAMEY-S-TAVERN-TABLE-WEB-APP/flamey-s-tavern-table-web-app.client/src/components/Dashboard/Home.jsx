@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
-import CreateCampaignModal from './CreateCampaignModal.jsx';
-import CopyButton from './CopyButton';
+import CreateCampaignModal from './CampaignUtils/CreateCampaignModal.jsx';
+import CopyButton from '../Utils/CopyButton.jsx';
+import DeleteCampaignModal from './CampaignUtils/DeleteCampaignModal.jsx';
 
 
 function Home() {
 
     document.title = "Flamey's Tavern Table - Home";
     const [userInfo, setUserInfo] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [campaignToDelete, setCampaignToDelete] = useState(null);
+
 
 
     useEffect(() => {
         const user = localStorage.getItem('user');
-        fetch("api/FlameyTT/home/" + user, {
+        fetch("api/Dashboard/home/" + user, {
             method: 'GET',
             credentials: 'include'
         }).then(response => response.json()).then(data => {
@@ -28,6 +32,13 @@ function Home() {
         setUserInfo(prev => ({
             ...prev,
             campaigns: [...(prev.campaigns || []), newCampaign]
+        }));
+    }
+
+    function handleCampaignDeleted(deletedCampaignId) {
+        setUserInfo(prev => ({
+            ...prev,
+            campaigns: prev.campaigns.filter(c => c.id !== deletedCampaignId)
         }));
     }
     
@@ -59,7 +70,7 @@ function Home() {
 
 
                     {/* Create Campaign Button */}
-                    <button onClick={() => setIsModalOpen(true)}>
+                    <button onClick={() => setIsCreateModalOpen(true)}>
                         + Create New Campaign
                     </button>
 
@@ -87,6 +98,13 @@ function Home() {
                                                 type="text"
                                             />
                                         <CopyButton code={c.joinCode} />
+                                        <button onClick={() => {
+                                            setCampaignToDelete(c); 
+                                            setIsDeleteModalOpen(true); 
+                                        }}>
+                                            Delete this Campaign
+                                        </button>
+                                        
                                         </td>
                                     </tr>
                                 ))}
@@ -101,12 +119,25 @@ function Home() {
             </div>
         }
         
-            {/* MODAL — appears only when isModalOpen is true */}
-            <CreateCampaignModal 
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onCampaignCreated={handleCampaignCreated}
-            />
+            {/* MODAL — appears only when isCreateModalOpen is true */}
+            {isCreateModalOpen && (
+                <CreateCampaignModal 
+                    isOpen={isCreateModalOpen}
+                    onClose={() => setIsCreateModalOpen(false)}
+                    onCampaignCreated={handleCampaignCreated}
+                />
+            )}
+            {isDeleteModalOpen && campaignToDelete && (
+                <DeleteCampaignModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onCampaignDeleted={(id) => {
+                        handleCampaignDeleted(id);
+                        setCampaignToDelete(null);
+                    }}
+                    campaign={campaignToDelete}
+                />
+            )}
      </section>
     );
     

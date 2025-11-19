@@ -15,7 +15,7 @@ function CreateCampaignModal({ isOpen, onClose, onCampaignCreated }) {
         setError(null);     // Clear any previous errors
 
         try {
-            const response = await fetch('api/FlameyTT/campaign/create', {
+            const response = await fetch('api/Dashboard/campaign/create', {
                 method: 'POST', 
                 headers: {   
                     'content-Type': 'application/json', 

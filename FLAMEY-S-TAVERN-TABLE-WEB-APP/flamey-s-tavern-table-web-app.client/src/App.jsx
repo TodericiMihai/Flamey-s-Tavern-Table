@@ -1,9 +1,9 @@
 import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
 import ProtectedRoutes from './ProtectedRoutes.jsx';
-import Home from './components/Home.jsx';
-import Admin from './components/Admin.jsx';
-import Login from './components/Login.jsx';
-import Register from './components/Register.jsx';
+import Home from './components/Dashboard/Home.jsx';
+import Admin from './components/Dashboard/Admin.jsx';
+import Login from './components/Auth/Login.jsx';
+import Register from './components/Auth/Register.jsx';
 import './App.css';
 
 const router = createBrowserRouter(
@@ -33,7 +33,7 @@ function App() {
     const isLogged = localStorage.getItem('user') 
 
     const logout = async () => {
-        const response = await fetch("api/FlameyTT/logout", {
+        const response = await fetch("api/Auth/logout", {
             method: 'GET',
             credentials: 'include'
         });

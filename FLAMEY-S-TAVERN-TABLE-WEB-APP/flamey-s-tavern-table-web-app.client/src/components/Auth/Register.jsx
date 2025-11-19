@@ -60,7 +60,7 @@ function Register() {
         const newUserName = dataToSend.Name.trim().split(" ")
         dataToSend.UserName= newUserName.join("")
 
-        const response = await fetch('api/FlameyTT/register', {
+        const response = await fetch('api/Auth/register', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(dataToSend),

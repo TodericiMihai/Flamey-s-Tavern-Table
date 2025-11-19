@@ -23,7 +23,7 @@ function Login() {
             <form action ='#' className='login' onSubmit={loginHandler}>
 
                 <label htmlFor ="email">Email: </label>
-                <input type="email" id="email" name="Email" required />
+                <input type="text" id="email" name="Email" required />
                 <br />
                 
                 <label htmlFor ="password">Password: </label>
@@ -60,7 +60,15 @@ function Login() {
             dataToSend.Remember = true
         }
 
-        const response = await fetch('api/FlameyTT/login', {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(dataToSend.Email)) {
+            const messageElem = document.querySelector('.message');
+            messageElem.innerHTML = "Please enter a valid email (format: aa@aa.aa)";
+            return; // Stop submission
+        }
+
+        const response = await fetch('api/Auth/login', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(dataToSend),
