@@ -69,6 +69,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapIdentityApi<User>();
 

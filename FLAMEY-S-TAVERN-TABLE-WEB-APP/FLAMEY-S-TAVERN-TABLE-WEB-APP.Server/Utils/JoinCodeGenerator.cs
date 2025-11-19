@@ -25,28 +25,3 @@
     }
 
 }
-
-/*string code;
-do
-{
-    code = JoinCodeGenerator.Generate();
-} 
-while (await _context.Campaigns.AnyAsync(c => c.JoinCode == code));
-
-campaign.JoinCode = code;
-
- DO THIS TO CHECK IF THERE IS ANY CODE THE SAME AS THE ONE GENERATED
-
-OR THIS 
-
-protected override void OnModelCreating(ModelBuilder builder)
-{
-    base.OnModelCreating(builder);
-
-    // Ensure JoinCode is unique in the database
-    builder.Entity<Campaign>()
-           .HasIndex(c => c.JoinCode)
-           .IsUnique();
-}
-
- */

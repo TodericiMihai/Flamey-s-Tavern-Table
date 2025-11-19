@@ -150,29 +150,29 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
 
             return Ok(new
             {
-                user = new
+                userInfo = new
                 {
-                    userInfo.Id,
-                    userInfo.Name,
                     userInfo.Email,
                     userInfo.UserName,
+                    userInfo.CreatedDate,
                     campaigns = userInfo.Campaigns.Select(c => new
                     {
-                        c.Id,
                         c.Name,
-                        c.Description
+                        c.Description,
+                        c.JoinCode
                     })
                 }
             });
         }
 
         [HttpPost("campaign/create"), Authorize]
-        public async Task<IActionResult> CreateCampaign(CreateCampaignDto dto)
+        public async Task<ActionResult> CreateCampaign(CreateCampaignDto dto)
         {
             try
             {
                 // Get logged-in user
                 var user = await userManager.GetUserAsync(User);
+
                 if (user == null)
                     return Unauthorized(new { message = "You must be logged in" });
 
@@ -186,6 +186,8 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                 // Create campaign
                 var campaign = new Campaign
                 {
+
+                    Id = Guid.NewGuid().ToString(),
                     Name = dto.Name,
                     Description = dto.Description,
                     DMId = user.Id,
@@ -205,7 +207,6 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers
                     message = "Campaign created",
                     campaign = new
                     {
-                        campaign.Id,
                         campaign.Name,
                         campaign.Description,
                         campaign.JoinCode
