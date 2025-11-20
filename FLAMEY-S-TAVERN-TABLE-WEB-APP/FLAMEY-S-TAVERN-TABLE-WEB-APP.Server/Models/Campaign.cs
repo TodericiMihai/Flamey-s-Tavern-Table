@@ -27,7 +27,7 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
         public bool IsActive { get; set; } = true;
 
         // Many players per campaign via join table
-        public List<Player> Players { get; set; } = new List<Player>();
+        public ICollection<Player> Players { get; set; } = new List<Player>();
 
         [Required]
         public string DMId { get; set; }  //FK to User 

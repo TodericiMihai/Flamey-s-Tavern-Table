@@ -49,7 +49,8 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
             // Load navigation properties (Campaigns)
             var userInfo = await userManager.Users
                 .Where(u => u.Id == user.Id)
-                .Include(u => u.UserIsDm)                
+                .Include(u => u.UserIsDm)
+                .Include(u => u.UserIsPlayer)
                 .FirstOrDefaultAsync();
 
             return Ok(new
@@ -66,8 +67,13 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
                         c.Name,
                         c.Description,
                         c.JoinCode
+                    }),
+                    characters =userInfo.UserIsPlayer.Select(c => new
+                    {
+                        c.Id,
+                        c.Name,
+                        c.Description
                     })
-                   
                 }
             });
         }
@@ -186,11 +192,29 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Controllers.Dashboard
                 if (campaign.DMId == user.Id)
                     return Unauthorized(new { message = "You cannot join your own campaign" });
 
+                var player = new Player
+                {
+
+                    Id = Guid.NewGuid().ToString(),
+                    Name = " ",
+                    Description = " ",
+                    OwnerId = user.Id,
+                    CampaignId = campaign.Id,   
+                };
 
 
+                context.Players.Add(player);
+                await context.SaveChangesAsync();
 
-                // Return new campaign
-                return Ok(new { message = "You joined " });
+                return Ok(new
+                {
+                    message = "You joined a campaign",
+                    player = new
+                    {
+                        player.Id,
+                        
+                    }
+                });
             }
             catch (Exception ex)
             {

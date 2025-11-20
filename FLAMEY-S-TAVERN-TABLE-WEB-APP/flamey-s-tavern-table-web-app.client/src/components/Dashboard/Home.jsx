@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CreateCampaignModal from './CampaignUtils/CreateCampaignModal.jsx';
 import CopyButton from '../Utils/CopyButton.jsx';
 import DeleteCampaignModal from './CampaignUtils/DeleteCampaignModal.jsx';
+import JoinCampaignModal from './CampaignUtils/JoinCampaignModal.jsx';
 
 
 function Home() {
@@ -10,6 +11,7 @@ function Home() {
     const [userInfo, setUserInfo] = useState({});
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
     const [campaignToDelete, setCampaignToDelete] = useState(null);
 
 
@@ -39,6 +41,13 @@ function Home() {
         setUserInfo(prev => ({
             ...prev,
             campaigns: prev.campaigns.filter(c => c.id !== deletedCampaignId)
+        }));
+    }
+
+    function handleCampaignJoined(newCharacter) {
+        setUserInfo(prev => ({
+            ...prev,
+            characters: [...(prev.characters || []), newCharacter]
         }));
     }
     
@@ -72,6 +81,10 @@ function Home() {
                     {/* Create Campaign Button */}
                     <button onClick={() => setIsCreateModalOpen(true)}>
                         + Create New Campaign
+                    </button>
+                    
+                    <button onClick={() => setIsJoinModalOpen(true)}>
+                        + Join Campaign
                     </button>
 
                     <br /><br />
@@ -113,6 +126,25 @@ function Home() {
                     ) : (
                         <div>No campaigns found.</div>
                     )}
+                    {/* Characters Table */}
+                    {userInfo.characters && userInfo.characters.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Character Id</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {userInfo.characters.map(c => (
+                                    <tr key={c.id}>
+                                        <td>{c.id}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <div>No characters found.</div>
+                    )}
             </div> :
             <div className="warning">
                 <div>Please log in to access your tavern table features.</div>
@@ -136,6 +168,13 @@ function Home() {
                         setCampaignToDelete(null);
                     }}
                     campaign={campaignToDelete}
+                />
+            )}
+            {isJoinModalOpen && (
+                <JoinCampaignModal 
+                    isOpen={isJoinModalOpen}
+                    onClose={() => setIsJoinModalOpen(false)}
+                    onCampaignJoined={handleCampaignJoined}
                 />
             )}
      </section>

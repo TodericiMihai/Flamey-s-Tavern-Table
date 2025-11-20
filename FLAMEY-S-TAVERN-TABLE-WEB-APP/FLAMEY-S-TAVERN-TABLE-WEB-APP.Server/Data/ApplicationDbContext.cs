@@ -32,22 +32,14 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data
                 .HasMany(u => u.UserIsPlayer)
                 .WithOne(p => p.Owner)
                 .HasForeignKey(p => p.OwnerId)
-                .OnDelete(DeleteBehavior.Cascade);
-
+                .OnDelete(DeleteBehavior.Restrict);
 
             // ---------- Campaign → Players ----------
-            builder.Entity<Character>()
-                .HasOne(c => c.Campaign)
-                .WithMany()
-                .HasForeignKey(c => c.CampaignId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // ---------- Player → Owner (User) ----------
-            builder.Entity<Player>()
-                .HasOne(p => p.Owner)
-                .WithMany()
-                .HasForeignKey(p => p.OwnerId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Campaign>()
+                .HasMany(c => c.Players)
+                .WithOne(p => p.Campaign)
+                .HasForeignKey(p => p.CampaignId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // ---------- Character → Items ----------
             builder.Entity<Character>()
@@ -77,9 +69,11 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Data
                 .HasForeignKey(l => l.CampaignId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Optional: Character hierarchy if needed
-            builder.Entity<Player>()
-                .HasBaseType<Character>();
+            builder.Entity<Character>()
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue<Character>("Character")
+                .HasValue<Player>("Player")
+                .HasValue<NPC>("NPC");
         }
     }
 

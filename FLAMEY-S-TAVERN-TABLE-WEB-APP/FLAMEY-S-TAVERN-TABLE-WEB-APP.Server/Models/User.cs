@@ -24,9 +24,9 @@ namespace FLAMEY_S_TAVERN_TABLE_WEB_APP.Server.Models
 
         public bool IsAdmin { get; set; } = false;
 
-        public List<Campaign> UserIsDm { get; set; } = new List<Campaign>();
+        public ICollection<Campaign> UserIsDm { get; set; } = new List<Campaign>();
 
-        public List<Player> UserIsPlayer { get; set; } = new List<Player>();
+        public ICollection<Player> UserIsPlayer { get; set; } = new List<Player>();
 
 
     }
