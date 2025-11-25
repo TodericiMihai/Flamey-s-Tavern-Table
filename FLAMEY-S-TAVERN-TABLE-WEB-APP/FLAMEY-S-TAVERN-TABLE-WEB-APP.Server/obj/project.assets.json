@@ -125,7 +125,7 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.SpaProxy/9.0.10": {
+      "Microsoft.AspNetCore.SpaProxy/9.0.11": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -1856,10 +1856,10 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/9.0.10": {
-      "sha512": "MiCiYQDvJIGjPYhBIUbbhECpjvfKJmK0+99hVJUT+DPaoTMEDDhFYCMqD+dva62Lh8wr2HfagUcLTw9mJcjK1A==",
+    "Microsoft.AspNetCore.SpaProxy/9.0.11": {
+      "sha512": "OCTeWJGdzDqgxagKTI4xK8Z9/lv7G8QtE3xtytYGrx/1BxgOAbJk7E/4MGHDLpKDniDaASdVduZ3pQ3yNZtgEA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/9.0.10",
+      "path": "microsoft.aspnetcore.spaproxy/9.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1867,7 +1867,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net9.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.9.0.10.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.9.0.11.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -4980,24 +4980,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\todmi\\.nuget\\packages\\": {},
-    "C:\\Users\\XPS 17\\Desktop\\vs\\vs_test_shared\\NuGetPackages": {}
+    "C:\\Users\\alexp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\todmi\\Desktop\\FLAMEY'S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj",
+      "projectUniqueName": "C:\\Users\\alexp\\Documents\\UPT\\AN4\\sem1\\msa\\Flamey-s-Tavern-Table\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj",
       "projectName": "FLAMEY-S-TAVERN-TABLE-WEB-APP.Server",
-      "projectPath": "C:\\Users\\todmi\\Desktop\\FLAMEY'S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj",
-      "packagesPath": "C:\\Users\\todmi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\todmi\\Desktop\\FLAMEY'S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\obj\\",
+      "projectPath": "C:\\Users\\alexp\\Documents\\UPT\\AN4\\sem1\\msa\\Flamey-s-Tavern-Table\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server.csproj",
+      "packagesPath": "C:\\Users\\alexp\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alexp\\Documents\\UPT\\AN4\\sem1\\msa\\Flamey-s-Tavern-Table\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Users\\XPS 17\\Desktop\\vs\\vs_test_shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\todmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\alexp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5077,7 +5072,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

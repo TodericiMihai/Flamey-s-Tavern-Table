@@ -16,62 +16,51 @@ const router = createBrowserRouter(
         <Route path ='/login' element={<Login />} />
         <Route path ='/register' element={<Register />} />
 
-        {/* i can add a custome element and customize it further as above */}
+        {/* 404 Page */}
         <Route path ='*' element={
-            <div>
-                <header>
-                    <h1>404 - Page Not Found</h1>
-                </header>
-                <p>
-                    <a href="/">Go back to Home Page</a>
-                </p>
+            <div className="page-container">
+                <div className="auth-form">
+                    <header><h1>404 - Lost in the Void</h1></header>
+                    <p style={{textAlign:'center'}}>The page you seek does not exist.</p>
+                    <a href="/" className="btn" style={{textAlign:'center', display:'block', textDecoration:'none'}}>Return to Tavern</a>
+                </div>
             </div>
         } />
     </Route>
 ));
+
 function App() {
-    const isLogged = localStorage.getItem('user') 
+    const isLogged = localStorage.getItem('user');
 
     const logout = async () => {
-        const response = await fetch("api/Auth/logout", {
-            method: 'GET',
-            credentials: 'include'
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.removeItem('user');
-
-            alert(data.message);
-
-            document.location = "/login";
-        } else {
-            console.log('Logout failed:', response);
-        }
+        // Simple logout logic for frontend dev
+        localStorage.removeItem('user');
+        window.location = "/login"; 
     };
 
     return (
-     <section >
-        <div className="top-nav">
+     <section>
+        {/* --- THE NAVBAR --- */}
+        <div className="navbar">
+            <a href="/" className="brand">🔥 Flamey's Table</a>
+            
             {
                 isLogged ?
                 <span className="item-holder">
-                    <a href ="/">Home</a>
+                    <a href ="/">Dashboard</a>
                     <a href ="/admin">Admin</a>
                     <span onClick={logout}>Log Out</span>
                 </span>:
                 <span className="item-holder">
-                    <a href ="/login">Login    </a>
+                    <a href ="/login">Login</a>
                     <a href ="/register">Register</a>
                 </span>
             }
         </div>
+
         <RouterProvider router={router} />
      </section>
     );
-    
-   
 }
 
 export default App;

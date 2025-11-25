@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:51959",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\todmi\\Desktop\\FLAMEY'S TAVERN TABLE\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\..\\flamey-s-tavern-table-web-app.client",
+"WorkingDirectory": "C:\\Users\\alexp\\Documents\\UPT\\AN4\\sem1\\msa\\Flamey-s-Tavern-Table\\FLAMEY-S-TAVERN-TABLE-WEB-APP\\FLAMEY-S-TAVERN-TABLE-WEB-APP.Server\\..\\flamey-s-tavern-table-web-app.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

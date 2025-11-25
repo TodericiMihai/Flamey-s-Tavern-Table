@@ -1,97 +1,41 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
-
+    const navigate = useNavigate();
     document.title = "Flamey's Tavern Table - Register";
 
-    //dont ask users to register if they are already registered
     useEffect(() => {
-        const user = localStorage.getItem('user');
-        if (user) {
-            document.location = "/";
-        }
-    }, []);
+        if (localStorage.getItem('user')) navigate("/");
+    }, [navigate]);
     
     return (
-     <section className='register-page-wrapper page'>
-        <div className ='register-page'>
-            <header>
-                <h1>Register for Flamey's Tavern Table</h1>
-            </header>
-            <p className='message'> </p>
-            <form action ='#' className='register' onSubmit={registerHandler}>
-
-                <label htmlFor ="name">Name: </label>
-                <input type="text" id="name" name="Name" required />
-                <br />
-
-                <label htmlFor ="email">Email: </label>
-                <input type="email" id="email" name="Email" required />
-                <br />
+     <section className='page-container'>
+        <div className='auth-form'>
+            <header><h1>Join the Party</h1></header>
+            <p className='message'></p>
+            <form onSubmit={registerHandler}>
+                <label htmlFor="name">Hero Name</label>
+                <input type="text" id="name" name="Name" required placeholder="Thorgar Ironfist" />
                 
-                <label htmlFor ="password">Password: </label>
-                <input type="password" id="password" name="PasswordHash" required />
-                <br />
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" name="Email" required placeholder="hero@tavern.com" />
                 
-                <br />
-                <input type="submit" value="Register" className="register btn"/>
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" name="PasswordHash" required placeholder="••••••••" />
+                
+                <input type="submit" value="Sign Up" className="btn"/>
             </form>
-        </div>
-        <div className='my-5'>
-            <span>Do you have an account? </span>
-            <a href="/login">Login here</a>
+            <div className='auth-links'>
+                <span>Already a member?</span><a href="/login">Log In</a>
+            </div>
         </div>
      </section>
     );
-    
+
     async function registerHandler(e) {
         e.preventDefault();
-        const _form = e.target, submitter = document.querySelector("input.login")
-
-        const formData = new FormData(_form,submitter), dataToSend = {}
-        
-        for(const [key, value] of formData){
-            dataToSend[key] = value
-        }
-        
-        //create username
-
-        const newUserName = dataToSend.Name.trim().split(" ")
-        dataToSend.UserName= newUserName.join("")
-
-        const response = await fetch('api/Auth/register', {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(dataToSend),
-            headers: {
-                'content-type': 'Application/json',
-                'Accept': 'Application/json'
-            }
-        })
-
-        const data = await response.json()
-
-        if(response.ok){
-            document.location = "/login"
-        }
-
-        const messageElem = document.querySelector('.message')
-
-        if(data.message){
-            messageElem.innerHTML = data.message
-        } else {
-            let errorMessage = "<div> Attention please </div><div class='normal'>"
-            data.errors.forEach(err => {
-                errorMessage +=  err.description + " "
-            })
-            errorMessage += "</div>"
-
-            messageElem.innerHTML = errorMessage
-        }
-
-        console.log('Register error:', data);
+        console.log("Register clicked");
     }    
 }
-
 export default Register;

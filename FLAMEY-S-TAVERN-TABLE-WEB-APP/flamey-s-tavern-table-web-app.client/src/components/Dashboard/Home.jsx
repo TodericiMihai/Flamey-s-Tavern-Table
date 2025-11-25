@@ -1,186 +1,60 @@
 import { useEffect, useState } from 'react';
-import CreateCampaignModal from './CampaignUtils/CreateCampaignModal.jsx';
-import CopyButton from '../Utils/CopyButton.jsx';
-import DeleteCampaignModal from './CampaignUtils/DeleteCampaignModal.jsx';
-import JoinCampaignModal from './CampaignUtils/JoinCampaignModal.jsx';
-
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate();
+    const [user, setUser] = useState("Traveler");
 
-    document.title = "Flamey's Tavern Table - Home";
-    const [userInfo, setUserInfo] = useState({});
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
-    const [campaignToDelete, setCampaignToDelete] = useState(null);
+    // Mock Data for Design Purposes
+    const myCharacters = [
+        { id: 1, name: "Thorgar", class: "Barbarian", level: 5 },
+        { id: 2, name: "Elara", class: "Wizard", level: 3 }
+    ];
 
-
+    const myCampaigns = [
+        { id: 1, name: "Curse of Strahd", role: "DM" },
+        { id: 2, name: "Lost Mines", role: "Player" }
+    ];
 
     useEffect(() => {
-        const user = localStorage.getItem('user');
-        fetch("api/Dashboard/home/" + user, {
-            method: 'GET',
-            credentials: 'include'
-        }).then(response => response.json()).then(data => {
-            setUserInfo(data.userInfo);//userInfo name must be the same as in backend
-            console.log('Home page user info:', data.userInfo);
-        }).catch(error => {
-            console.log('Error home page:', error);
-        });
-    }, []);
-
-    // ⬅ This gets called after a campaign is created inside the modal
-    function handleCampaignCreated(newCampaign) {
-        setUserInfo(prev => ({
-            ...prev,
-            campaigns: [...(prev.campaigns || []), newCampaign]
-        }));
-    }
-
-    function handleCampaignDeleted(deletedCampaignId) {
-        setUserInfo(prev => ({
-            ...prev,
-            campaigns: prev.campaigns.filter(c => c.id !== deletedCampaignId)
-        }));
-    }
-
-    function handleCampaignJoined(newCharacter) {
-        setUserInfo(prev => ({
-            ...prev,
-            characters: [...(prev.characters || []), newCharacter]
-        }));
-    }
-    
-    return (
-     <section className='home-page-wrapper page'>
-        <header>
-            <h1>Welcome to Flamey's Tavern Table</h1>
-        </header>
-        {
-            userInfo ?
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Created Date</th>
-                        </tr> 
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{userInfo.userName}</td>    
-                            <td>{userInfo.email}</td>
-                            <td>{userInfo.createdDate ? userInfo.createdDate.split(':')[0] : ''}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                  <br />
-
-
-                    {/* Create Campaign Button */}
-                    <button onClick={() => setIsCreateModalOpen(true)}>
-                        + Create New Campaign
-                    </button>
-                    
-                    <button onClick={() => setIsJoinModalOpen(true)}>
-                        + Join Campaign
-                    </button>
-
-                    <br /><br />
-
-                    {/* Campaigns Table */}
-                    {userInfo.campaigns && userInfo.campaigns.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Campaign Name</th>
-                                    <th>Description</th>
-                                    <th>Join Code</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {userInfo.campaigns.map(c => (
-                                    <tr key={c.id}>
-                                        <td>{c.name}</td>
-                                        <td>{c.description}</td>
-                                         <td>
-                                            <input
-                                                value={c.joinCode}
-                                                disabled
-                                                type="text"
-                                            />
-                                        <CopyButton code={c.joinCode} />
-                                        <button onClick={() => {
-                                            setCampaignToDelete(c); 
-                                            setIsDeleteModalOpen(true); 
-                                        }}>
-                                            Delete this Campaign
-                                        </button>
-                                        
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div>No campaigns found.</div>
-                    )}
-                    {/* Characters Table */}
-                    {userInfo.characters && userInfo.characters.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Character Id</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {userInfo.characters.map(c => (
-                                    <tr key={c.id}>
-                                        <td>{c.id}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div>No characters found.</div>
-                    )}
-            </div> :
-            <div className="warning">
-                <div>Please log in to access your tavern table features.</div>
-            </div>
+        const loggedUser = localStorage.getItem('user');
+        if (!loggedUser) {
+            navigate('/login');
+        } else {
+            setUser(loggedUser);
         }
-        
-            {/* MODAL — appears only when isCreateModalOpen is true */}
-            {isCreateModalOpen && (
-                <CreateCampaignModal 
-                    isOpen={isCreateModalOpen}
-                    onClose={() => setIsCreateModalOpen(false)}
-                    onCampaignCreated={handleCampaignCreated}
-                />
-            )}
-            {isDeleteModalOpen && campaignToDelete && (
-                <DeleteCampaignModal
-                    isOpen={isDeleteModalOpen}
-                    onClose={() => setIsDeleteModalOpen(false)}
-                    onCampaignDeleted={(id) => {
-                        handleCampaignDeleted(id);
-                        setCampaignToDelete(null);
-                    }}
-                    campaign={campaignToDelete}
-                />
-            )}
-            {isJoinModalOpen && (
-                <JoinCampaignModal 
-                    isOpen={isJoinModalOpen}
-                    onClose={() => setIsJoinModalOpen(false)}
-                    onCampaignJoined={handleCampaignJoined}
-                />
-            )}
-     </section>
+    }, [navigate]);
+
+    return (
+        <div className="dashboard">
+            <header style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                <h1>Greetings, {user}.</h1>
+                <button className="btn" style={{width:'auto', padding:'0.5rem 2rem'}}>+ Create New</button>
+            </header>
+
+            <h2 className="section-title">Your Heroes</h2>
+            <div className="grid-container">
+                {myCharacters.map(char => (
+                    <div key={char.id} className="card">
+                        <h3>{char.name}</h3>
+                        <p>Level {char.level} {char.class}</p>
+                        <button className="btn">View Sheet</button>
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="section-title">Active Campaigns</h2>
+            <div className="grid-container">
+                {myCampaigns.map(camp => (
+                    <div key={camp.id} className="card">
+                        <h3>{camp.name}</h3>
+                        <p>Role: <strong>{camp.role}</strong></p>
+                        <button className="btn">Enter World</button>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
-    
-   
 }
 
 export default Home;

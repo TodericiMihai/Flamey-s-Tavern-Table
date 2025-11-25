@@ -1,11 +1,181 @@
-﻿#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+﻿/* --- 1. RESET DEFAULTS & VARIABLES --- */
+:root {
+  --bg-dark: #1a1b26;
+  --card-bg: #24283b;
+  --primary: #ff9e64;       /* Flamey Orange */
+  --primary-hover: #db8853; 
+  --accent: #e0af68;        /* Gold */
+  --text-main: #c0caf5;
+  --text-muted: #565f89;
+  --border-color: #414868;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  line-height: 1.6;
+}
+
+/* --- 2. LAYOUT UTILITIES --- */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Forces full screen height */
+  padding: 20px;
+  padding-top: 80px; /* Space for fixed navbar */
+}
+
+/* --- 3. THE FORM CARD --- */
+.auth-form {
+  background-color: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  
+  width: 100%;
+  max-width: 400px;  /* Fixed width for consistency */
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form header h1 {
+  color: var(--primary);
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0 0 1.5rem 0;
+}
+
+/* --- 4. INPUTS & BUTTONS --- */
+.auth-form label {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1.2rem;
+  background-color: #16161e;
+  border: 1px solid var(--border-color);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; 
+}
+
+.auth-form input:focus {
+  outline: 1px solid var(--primary);
+  border-color: var(--primary);
+}
+
+.btn {
+  background-color: var(--primary);
+  color: #1a1b26;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* --- 5. LINKS & EXTRAS --- */
+.auth-links {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+.checkbox-group input { width: auto; margin: 0; }
+.checkbox-group label { margin: 0; }
+
+/* --- 6. NAVBAR --- */
+.navbar {
+  background-color: #13141c;
+  border-bottom: 1px solid var(--primary);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+}
+.brand { color: var(--primary); font-weight: bold; font-size: 1.2rem; text-decoration: none; }
+.item-holder a, .item-holder span { color: var(--text-main); margin-left: 15px; text-decoration: none; cursor: pointer; }
+
+/* --- 7. DASHBOARD GRID --- */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  padding-top: 100px; /* clear nav */
+}
+
+.section-title {
+  color: var(--accent);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.card h3 { color: var(--primary); margin-top: 0; }
